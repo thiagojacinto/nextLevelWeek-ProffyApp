@@ -23,11 +23,11 @@ export const PageHeader = styled.header`
 
   .top-bar-container a {
     height: 3.2rem;
-    transition: opacity 0.2s;
+    transition: opacity 0.3s;
+  }
 
-    & :hover {
-      opacity: 0.6;
-    }
+  .top-bar-container a:hover {
+    opacity: 0.6;
   }
 
   .top-bar-container > img {
