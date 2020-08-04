@@ -40,13 +40,36 @@ export const PageHeader = styled.header`
     position: relative;
     margin: 3.2rem auto;
 
-    font: 700 3.6rem Noto Sans JP;
+    font: 700 3.6rem "Noto Sans JP";
     line-height: 4.8rem;
     color: var(--color-title-in-primary);
   }
+
+  @media (min-width: 700px) {
+    height: 340px;
+  }
+
+  .top-bar-container {
+    max-width: 1100px;
+  }
+
+  .header-content {
+    flex: 1;
+    max-width: 740px;
+    padding-bottom: 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .header-content > strong {
+    max-width: 350px;
+  }
 `;
 
-const Header: React.FC = ({ children }) => {
+const Header: React.FC = ({ children = null }) => {
   return (
     <PageHeader>
       <div className="top-bar-container">
