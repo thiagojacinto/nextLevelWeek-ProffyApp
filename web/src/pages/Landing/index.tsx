@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import logoImage from "../../assets/images/logo.svg";
-import landingImage from "../../assets/images/landing.svg";
-import studyIcon from "../../assets/images/icons/study.svg";
-import giveClassesIcon from "../../assets/images/icons/give-classes.svg";
-import heartIcon from "../../assets/images/icons/purple-heart.svg";
+const logoImage = require("../../assets/images/logo.svg");
+const landingImage = require("../../assets/images/landing.svg");
+const studyIcon = require("../../assets/images/icons/study.svg");
+const giveClassesIcon = require("../../assets/images/icons/give-classes.svg");
+const heartIcon = require("../../assets/images/icons/purple-heart.svg");
 
 export const PageLandingDiv: React.FC = styled.div`
   width: 100vw;
@@ -148,15 +149,15 @@ const Landing: React.FC = () => {
         />
 
         <div className="buttons-container">
-          <a href="#" className="study">
+          <Link to="/select" className="study">
             <img src={studyIcon} alt="To Study" />
             Select
-          </a>
+          </Link>
 
-          <a href="#" className="give-classes">
+          <Link to="/booking" className="give-classes">
             <img src={giveClassesIcon} alt="To Give classes" />
             Booking
-          </a>
+          </Link>
         </div>
 
         <span className="total-connections">
