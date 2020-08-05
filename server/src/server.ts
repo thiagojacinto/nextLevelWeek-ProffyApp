@@ -1,4 +1,5 @@
 import Hapi from "@hapi/hapi";
+import Joi from "joi";
 
 const { port, host } = require("./config");
 import Routes from "./Routes";
@@ -8,6 +9,8 @@ const init = async () => {
     port: port,
     host: host,
   });
+
+  server.validator(Joi);
 
   server.route(Routes);
 

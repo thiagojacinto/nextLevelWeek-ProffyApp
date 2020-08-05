@@ -13,11 +13,7 @@ export const Routes: ServerRoute[] = [
     },
   },
 
-  {
-    method: "POST",
-    path: "/courses",
-    handler: RegisterInstructor,
-  },
+  RegisterInstructor,
 
   {
     method: "*",
