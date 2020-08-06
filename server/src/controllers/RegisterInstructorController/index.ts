@@ -1,5 +1,5 @@
 import { ServerRoute } from "@hapi/hapi";
-import { Boom } from "@hapi/boom";
+import Boom from "@hapi/boom";
 import Joi from "joi";
 import { errorMessage } from "../../Routes/index";
 import { db } from "../../database/connection";
@@ -7,12 +7,22 @@ import convertHourToMinutes from "../../utils/convertHoursToMinutes";
 
 interface ScheduleItem {
   week_day: Number;
-  to: Number;
-  from: Number;
+  to: string;
+  from: string;
+}
+
+interface InstructorInput {
+  name: string;
+  avatar: string;
+  whatsapp: string;
+  bio: string;
+  subject: string;
+  cost: Number;
+  schedule: Array<ScheduleItem>;
 }
 
 const scheduleItemForValidation: Joi.ObjectSchema = Joi.object().keys({
-  week_day: Joi.number().required(),
+  week_day: Joi.number().required().min(0).max(7),
   to: Joi.string().required(),
   from: Joi.string().required(),
 });
@@ -22,14 +32,14 @@ export const RegisterInstructor: ServerRoute = {
   path: "/courses",
   options: {
     validate: {
-      failAction: "log",
+      failAction: "error",
       payload: Joi.object({
         name: Joi.string().min(1).max(250),
         avatar: Joi.string(),
         whatsapp: Joi.string().min(8),
         bio: Joi.string(),
         subject: Joi.string().min(3),
-        cost: Joi.number().positive(),
+        cost: Joi.number().positive().min(30),
         schedule: Joi.array().items(scheduleItemForValidation),
       }),
     },
@@ -48,7 +58,7 @@ export const RegisterInstructor: ServerRoute = {
         subject,
         cost,
         schedule,
-      } = request.payload;
+      } = request.payload as InstructorInput;
 
       const [insertedInstructorsId] = await trx("instructors").insert({
         name,
@@ -63,12 +73,12 @@ export const RegisterInstructor: ServerRoute = {
         instructor_id: insertedInstructorsId,
       });
 
-      const coursesSchedule = schedule.map((item: ScheduleItem) => {
+      const coursesSchedule = schedule.map((item) => {
         return {
           course_id: insertedCourseId,
           week_day: item.week_day,
-          from: convertHourToMinutes(item.from.toString()),
-          to: convertHourToMinutes(item.to.toString()),
+          from: convertHourToMinutes(item.from),
+          to: convertHourToMinutes(item.to),
         };
       });
 
@@ -83,8 +93,7 @@ export const RegisterInstructor: ServerRoute = {
         .header("content-type", "application/json");
     } catch (err) {
       console.error(err);
-
-      return new Boom();
+      throw Boom.badRequest();
     }
   },
 };
