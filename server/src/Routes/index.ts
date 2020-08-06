@@ -1,20 +1,19 @@
 import { ServerRoute } from "@hapi/hapi";
 import { RegisterInstructor } from "../controllers/RegisterInstructorController";
+import { ListCourses } from "../controllers/ListCoursesController";
+import Boom, { notFound } from "@hapi/boom";
 
 export const errorMessage = "An error has ocurried. Please try again later.";
 
 export const Routes: ServerRoute[] = [
   RegisterInstructor,
+  ListCourses,
 
   {
     method: "*",
     path: "/{any*}",
     handler: function (request, h) {
-      return h
-        .response()
-        .message("Error: Resource not found.")
-        .code(404)
-        .type("application/json");
+      throw Boom.notFound("Resource not found. Sorry");
     },
   },
 ];
