@@ -4,7 +4,7 @@
   "description": "back-end of Proffy App",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --transpile-only --ignore-watch node_modules --clear --respawn src/server.ts",
+    "start": "ts-node-dev --transpile-only --ignore-watch node_modules --cls --respawn src/server.ts",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
     "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
   },
