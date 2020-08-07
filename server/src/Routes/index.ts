@@ -1,13 +1,17 @@
 import { ServerRoute } from "@hapi/hapi";
 import { RegisterInstructor } from "../controllers/RegisterInstructorController";
 import { ListCourses } from "../controllers/ListCoursesController";
-import Boom, { notFound } from "@hapi/boom";
+import { CountConnections } from "../controllers/ConnectionsMadeController";
+import { RegisterConnection } from "../controllers/ConnectionsController";
+import Boom from "@hapi/boom";
 
 export const errorMessage = "An error has ocurried. Please try again later.";
 
 export const Routes: ServerRoute[] = [
   RegisterInstructor,
   ListCourses,
+  RegisterConnection,
+  CountConnections,
 
   {
     method: "*",
