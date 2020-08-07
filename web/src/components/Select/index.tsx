@@ -49,7 +49,7 @@ const Select: React.FC<SelectProps> = ({ label, name, options, ...attr }) => {
     <SelectWrapper>
       <div className="select-block">
         <label htmlFor={name}>{label}</label>
-        <select name={name} id={name} defaultValue="" {...attr}>
+        <select name={name} id={name} value="" {...attr}>
           <option value="" disabled>
             - - Please select one - -
           </option>
