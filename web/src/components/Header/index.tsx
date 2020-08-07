@@ -67,6 +67,14 @@ export const PageHeader = styled.header`
   .header-content > strong {
     max-width: 350px;
   }
+
+  .header-content p {
+    max-width: 30rem;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    color: var(--color-text-in-primary);
+    margin-top: 2.4rem;
+  }
 `;
 
 const Header: React.FC = ({ children = null }) => {
