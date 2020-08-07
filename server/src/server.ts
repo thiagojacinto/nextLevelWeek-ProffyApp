@@ -8,6 +8,9 @@ const init = async () => {
   const server = Hapi.server({
     port: port,
     host: host,
+    routes: {
+      cors: true,
+    },
   });
 
   server.validator(Joi);
