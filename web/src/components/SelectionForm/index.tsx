@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Input from "../Input";
+import Select from "../Select";
 
 export const Form = styled.form`
   fieldset {
@@ -27,8 +28,31 @@ type uniqueId = { id: string };
 export const SelectionForm: React.FC<uniqueId> = ({ id }: uniqueId) => {
   return (
     <Form id={id}>
-      <Input name="subject" label="Subject" />
-      <Input name="week_day" label="Week day" />
+      <Select
+        name="subject"
+        label="Subject"
+        options={[
+          { value: "Art", label: "Art" },
+          { value: "Math", label: "Math" },
+          { value: "Chemestry", label: "Chemestry" },
+          { value: "Portuguese", label: "Portuguese" },
+          { value: "English", label: "English" },
+          { value: "Physics", label: "Physics" },
+        ]}
+      />
+      <Select
+        name="week_day"
+        label="Week day"
+        options={[
+          { value: "0", label: "Sunday" },
+          { value: "1", label: "Monday" },
+          { value: "2", label: "Tuesday" },
+          { value: "3", label: "Wednesday" },
+          { value: "4", label: "Thursday" },
+          { value: "5", label: "Friday" },
+          { value: "6", label: "Saturday" },
+        ]}
+      />
       <Input type="time" name="time" label="Time" />
     </Form>
   );
