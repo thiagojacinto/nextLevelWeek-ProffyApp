@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { API } from "../../services/api";
 
 const logoImage = require("../../assets/images/logo.svg");
 const landingImage = require("../../assets/images/landing.svg");
@@ -132,6 +133,14 @@ export const PageLandingDiv: React.FC = styled.div`
 `;
 
 const Landing: React.FC = () => {
+  let [connectionsCount, setConnectionsCount] = useState(0);
+
+  useEffect(() => {
+    API.get("/courses/connections").then((res) =>
+      setConnectionsCount(res.data.connections.total)
+    );
+  }, []);
+
   return (
     <PageLandingDiv>
       <div id="page-landing-content" className="container">
@@ -161,7 +170,7 @@ const Landing: React.FC = () => {
         </div>
 
         <span className="total-connections">
-          More than 200 connections made{" "}
+          More than {connectionsCount} connections made{" "}
           <img src={heartIcon} alt="heart for like" />
         </span>
       </div>
